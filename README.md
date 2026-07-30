@@ -1,4 +1,6 @@
 # Ex. No:1b 			Study of Client Server Chat Applications
+## Name :Dhanappriya S
+## Reg.No. : 212224230056
 
 ## Aim: 
 To perform a study on Client Server Chat Applications
@@ -73,6 +75,61 @@ Client-server chat applications are versatile tools that facilitate real-time co
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
 
+## Program:
+Client Program
+``` python
+server.py
+
+import socket
+
+# Server setup
+host = '127.0.0.1'   # Localhost
+port = 5000          # Port number
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind((host, port))
+server_socket.listen(1)
+
+print("Server is listening on", host, ":", port)
+conn, addr = server_socket.accept()
+print("Connection from:", addr)
+
+while True:
+    data = conn.recv(1024).decode()
+    if not data:
+        break
+    print("Client:", data)
+    message = input("Server: ")
+    conn.send(message.encode())
+
+conn.close()
+```
+## client.py
+```
+import socket
+
+# Client setup
+host = '127.0.0.1'   # Same as server
+port = 5000
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect((host, port))
+
+while True:
+    message = input("Client: ")
+    client_socket.send(message.encode())
+    data = client_socket.recv(1024).decode()
+    print("Server:", data)
+
+client_socket.close()
+
+```
+## Output:
+### server:
+<img width="1353" height="311" alt="image" src="https://github.com/user-attachments/assets/17d0dd7e-776b-4140-bf92-84e845f9fc6d" />
+
+### client:
+<img width="1377" height="327" alt="image" src="https://github.com/user-attachments/assets/0f2d57f1-9260-401a-a7c6-f9e64d99a353" />
 
 ## Result:
 
